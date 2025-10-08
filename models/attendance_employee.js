@@ -15,7 +15,7 @@ const attendanceSchema = new mongoose.Schema({
     faceLogs: [{
         location: {
             type: {
-                String,
+                type:string,
                 enum: ['Point'], // GeoJSON type
                 default: 'Point',
             },
