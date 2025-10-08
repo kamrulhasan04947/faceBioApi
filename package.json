@@ -1,0 +1,21 @@
+{
+  "name": "facebio",
+  "version": "1.0.0",
+  "description": "Face access controller android backend",
+  "main": "server",
+  "scripts": {
+    "start": "node -r dotenv/config server.js",
+    "dev": "nodemon -r dotenv/config server.js",
+    "test": "jest --watch --detectOpenHandles --setupFiles dotenv/config"
+  },
+  "author": "Kamrul Hasan",
+  "license": "ISC",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^17.2.1",
+    "express": "^5.1.0",
+    "mongoose": "^8.17.2",
+    "multer": "^2.0.2",
+    "nodemon": "^3.1.10"
+  }
+}
