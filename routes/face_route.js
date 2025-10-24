@@ -20,10 +20,10 @@ const upload = multer({ storage: storage });
 
 router.post('/face_employees/register-face', upload.single('faceImage'), async (req, res) => {
   try {
-    const {employeeId} = req.body;
+    const {employeeId, location, faceTimestamp} = req.body;
     const faceImage = req.file ? req.file.path : null;
     if (!employeeId) {
-      return res.status(400).json({ message: 'employreeId and faceImage are required' });
+      return res.status(400).json({ message: 'employeeId and faceImage are required' });
     }
     // Check if employee with the same employreeId already exists
     const existingEmployee = await faceEmployee.findOne({ employeeId });
@@ -36,6 +36,10 @@ router.post('/face_employees/register-face', upload.single('faceImage'), async (
         employee: activeEmployee._id, // Reference to the EmployeeMaster document
         employeeId: activeEmployee.employeeId, // Use the employeeId from EmployeeMaster
         facImage: faceImage,
+        facImage:[{
+          location: location ? JSON.parse(location) : { type: "Point", coordinates: [0, 0] },
+          faceTimestamp: faceTimestamp || Date.now()
+        }],
       });
       await newFaceEmployee.save();
       res.status(201).json({ 
